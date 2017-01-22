@@ -16,7 +16,6 @@ class Vecteur(object):
 		return res
 
 	def produit_transpose(self,matrice_a):
-		
 		print(matrice_a.tableau_c)
 		print(matrice_a.tableau_l)
 		print(matrice_a.tableau_i)
