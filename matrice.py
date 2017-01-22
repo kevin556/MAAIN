@@ -2,9 +2,22 @@
 import numpy as np
 
 class Matrice(object):
+	
+	def __init__(self,text):
+		self.tableau_c = []
+		self.tableau_l = []
+		self.tableau_i = []
+		self.nb_sommet = 0
+		if(isinstance(text,basestring)):
+			self.tableau_c,self.get_from_filename(text)
+		else:
+			get_from_matrice(text)
 
-	def __init__(self,matrice_a):
 
+	def get_from_filename(self,fileName):
+		self.tableau_c,self.tableau_l, self.tableau_i,self.nb_sommet = get_matrix_from_file(fileName)
+
+	def get_from_matrice(self,matrice_a):
 		self.tableau_c,self.tableau_l, self.tableau_i = get_all_table(matrice_a)
 		self.nb_sommet = matrice_a.shape[0]
 
@@ -25,3 +38,12 @@ def get_all_table(matrice_a):
 				table_i.append(j)
 	table_l.append(len(table_c))
 	return table_c,table_l,table_i
+
+def get_matrix_from_file(fileName):
+	f=open(fileName,'r')
+	print(type(f))
+	lignes = f.readlines()
+	f.close()
+	for ligne in lignes:
+		print ligne
+	
