@@ -9,6 +9,7 @@ class Matrice(object):
 		self.tableau_i = []
 		self.nb_sommet = 0
 		print(type(text))
+		#we have to get the type of matrix
 		if(isinstance(text,basestring)):
 			self.tableau_c,self.get_from_filename(text)
 		else:
@@ -22,22 +23,23 @@ class Matrice(object):
 		self.tableau_c,self.tableau_l, self.tableau_i = get_all_table(matrice_a)
 		self.nb_sommet = matrice_a.shape[0]
 
-#a refaire pour des matrices stochastiques c'est a dire avec des frequences.
+	def produit_vecteur_matrix(self,vecteur_a):
+		res=[]
+		somme = 0
+		for i in range(0,int(self.nb_sommet),1):
+			for k in range(self.tableau_l[i],self.tableau_l[i+1],1):
+				somme += self.tableau_c[k] * vecteur_a[self.tableau_i[k]]
+			res.append(somme)
+		return res
 
-	def get_all_table(matrice_a):
-		#on part du principe que la matrice est de taille n * n
-		table_c=[];table_l=[];table_i=[]
-		matrice_size = matrice_a.shape[0]
-		element_courant = 0
-		for i in range(matrice_size):
-			table_l.append(element_courant)
-			for j in range(matrice_size):
-				if(matrice_a[i][j] !=0.0):
-					table_c.append(matrice_a[i][j])
-					element_courant+=1		
-					table_i.append(j)
-		table_l.append(len(table_c))
-		return table_c,table_l,table_i
+	def produit_transpose(self,vecteur_a):
+		res=[]
+		for i in range(0,self.nb_sommet,1):
+			res.append(0)
+		for i in range(0,self.nb_sommet,1):
+			for j in range(self.tableau_l[i],self.tableau_l[i+1],1):
+				res[self.tableau_i[j]] += self.tableau_c[j] * vecteur_a[i]
+		return res
 
 
 def get_matrix_from_file(fileName):
@@ -63,23 +65,26 @@ def get_matrix_from_file(fileName):
 				chiffre_stocke = chiffre_gauche
 
 			if chiffre_gauche != chiffre_stocke:
-				print 'compteur_chiffre_gauche %d chiffre_gauche %s chiffre_stocke %s' %(compteur_chiffre_gauche,chiffre_gauche,chiffre_stocke)
+				#print 'compteur_chiffre_gauche %d chiffre_gauche %s chiffre_stocke %s' %(compteur_chiffre_gauche,chiffre_gauche,chiffre_stocke)
 				for j in range(0,compteur_chiffre_gauche ,1):
 					table_c.append(1/(float)(compteur_chiffre_gauche))
 				table_l.append(table_l[-1]+compteur_chiffre_gauche)
 				compteur_chiffre_gauche = 0
 				chiffre_stocke = chiffre_gauche
-
-
 			compteur_chiffre_gauche+=1
-
 			table_i.append(chiffre_droit)
 	print 'chiffre_stocke %s '%(chiffre_stocke)
 	for i in range(0,compteur_chiffre_gauche,1):
 		table_c.append(1/(float)(compteur_chiffre_gauche))
 	table_l.append(len(table_c))
-
-
+	print 'nb_lignes %d'%(len(lignes))
 	print table_c
+	print table_l
+	print table_i
+	nombre_sommet = chiffre_stocke
 	return table_c,table_l,table_i,nombre_sommet
+
+
+	
+
 
