@@ -1,9 +1,7 @@
 #!/usr/bin/python2.7
 import math
 
-
 class Vecteur(object):
-
    
     def somme_vecteur(self,vecteur_b):
         somme = 0.0
@@ -17,9 +15,10 @@ class Vecteur(object):
             somme = math.sqrt(somme)
             return somme
 
-
     def __getitem__(self,index):
-        return self.vecteur[int(index)]
+        if(index < len(self.vecteur)):
+            return self.vecteur[int(index)]
+
 
     def __str__(self):
         s=""
@@ -27,14 +26,23 @@ class Vecteur(object):
             s+="valeur de i %d -> %d\n"%(i,self.vecteur[i])
         return s
 
-    def __init__(self,*arg):
+    def __init__(self,sommet_depart,*arg):
         self.vecteur=[] 
         if len(arg) == 1:
             print('taille %d'%(int(arg[0])))
             self.vecteur.append(1)
             for i in range(1,int(arg[0]),1):
-                self.vecteur.append(0)
+                self.vecteur.append(0)		
         else:
             for i in range(0,len(arg),1):   
                 self.vecteur.append(arg[i])
-        
+        if sommet_depart > 0:
+        	self.vecteur[0]=0
+        	self.vecteur[sommet_depart] = 1
+
+
+
+    def pagerank_zero(self,vecteur_a,sommet_depart,epsilon):
+		while self.somme_vecteur(vecteur_a)>epsilon:
+			print "la"
+

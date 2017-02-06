@@ -43,7 +43,10 @@ class Matrice(object):
 		return res
 
 
-	
+	def pagerank_zero(self,vecteur_a,sommet_depart,nb_pas):
+		for i in range(0,int(nb_pas)-1,1):
+			print(self.produit_transpose(vecteur_a))
+
 
 
 def get_matrix_from_file(fileName):
@@ -64,12 +67,12 @@ def get_matrix_from_file(fileName):
 			chiffre_lu =lignes[i].strip("\n").strip('\r').split('	')
 			chiffre_gauche = chiffre_lu[0]
 			chiffre_droit = chiffre_lu[1]
-		
 			#pour l\'initialisation
 			if chiffre_stocke == -1:
 				chiffre_stocke = chiffre_gauche
-			chiffre_stocke = chiffre_gauche
+
 			if chiffre_gauche != chiffre_stocke:
+				#print 'compteur_chiffre_gauche %d chiffre_gauche %s chiffre_stocke %s' %(compteur_chiffre_gauche,chiffre_gauche,chiffre_stocke)
 				for j in range(0,compteur_chiffre_gauche ,1):
 					table_c.append(1/(float)(compteur_chiffre_gauche))
 				table_l.append(table_l[-1]+compteur_chiffre_gauche)
@@ -77,12 +80,11 @@ def get_matrix_from_file(fileName):
 				chiffre_stocke = chiffre_gauche
 			compteur_chiffre_gauche+=1
 			table_i.append(chiffre_droit)
-
 #	print 'chiffre_stocke %s '%(chiffre_stocke)
 	for i in range(0,compteur_chiffre_gauche,1):
 		table_c.append(1/(float)(compteur_chiffre_gauche))
 	table_l.append(len(table_c))
-	nombre_sommet = int(chiffre_stocke) + 2
+	nombre_sommet = int(compteur_chiffre_gauche) + 1
 	return table_c,table_l,table_i,nombre_sommet
 
 
