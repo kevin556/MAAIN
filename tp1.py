@@ -5,19 +5,22 @@ from matrice_new import Matrice
 from vecteur import Vecteur
 
 c = Matrice(argv[1])
-print c.tableau_c;
-print c.tableau_l;
-print c.tableau_i;
-print(c.nb_colonne)
+print c.tableau_l
+print(c.tableau_c)
 
-f = Vecteur(0,c.nb_colonne)
+f = Vecteur(c.nb_colonne,0)
+f.vecteur = [0.0,0.5,0.0,0.5]
+print f.vecteur
+print c.produit_direct(f)
+print(c.produit_transpose(f))
+
+
+'''
+f = Vecteur(55,c.nb_colonne)
 print(f)
 
 a = c.produit_direct(f)
-print ("produit direct %s " %(a))
-
-'''
-print(a.somme_vecteur(b))
 '''
 
-print(c.produit_transpose(f))
+#print(a.somme_vecteur(b))
+#

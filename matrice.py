@@ -43,9 +43,6 @@ class Matrice(object):
 		return res
 
 
-	
-
-
 def get_matrix_from_file(fileName):
 	nombre_sommet=0;nb_ligne = 0
 	table_c =[];table_l =[0];table_i =[]
@@ -64,7 +61,7 @@ def get_matrix_from_file(fileName):
 			chiffre_lu =lignes[i].strip("\n").strip('\r').split('	')
 			chiffre_gauche = chiffre_lu[0]
 			chiffre_droit = chiffre_lu[1]
-		
+			
 			#pour l\'initialisation
 			if chiffre_stocke == -1:
 				chiffre_stocke = chiffre_gauche
@@ -79,6 +76,8 @@ def get_matrix_from_file(fileName):
 			table_i.append(chiffre_droit)
 
 #	print 'chiffre_stocke %s '%(chiffre_stocke)
+	
+
 	for i in range(0,compteur_chiffre_gauche,1):
 		table_c.append(1/(float)(compteur_chiffre_gauche))
 	table_l.append(len(table_c))

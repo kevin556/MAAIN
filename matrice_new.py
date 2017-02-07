@@ -7,24 +7,29 @@ class Matrice(object):
 		self.tableau_c,self.tableau_l,self.tableau_i,self.nb_colonne = get_matrix_from_file(text)
 
 	def produit_direct(self,vecteur_a):
-		res=[]
-		for i in range(0,int(self.nb_colonne),1):
-			somme = 0
-			for k in range(int(self.tableau_l[i]),int(self.tableau_l[i+1]),1):
-				print("valeur de i %d %d %d k -> %d \n")%(i,self.tableau_l[i], self.tableau_l[i+1],k)
-
-				print "self.tableau_c[k] %f vecteur_a[%d] %f\n"%(float(self.tableau_c[k]),int(self.tableau_i[k]),float(vecteur_a[int(self.tableau_i[k])]))
-				somme += float(self.tableau_c[k]) * float(vecteur_a[int(self.tableau_i[k])])
+		n = int(self.nb_colonne)
+		res =[]
+		for i in range(0,n,1):
+			somme = 0.0
+			print "difference %f %f \n"%(int(self.tableau_l[i]),int(self.tableau_l[i+1]))
+			for k in range(int(self.tableau_l[i]), int(self.tableau_l[i+1]) , 1):
+				print "%f * %f -> %f "%(float(self.tableau_c[k]),float(vecteur_a.vecteur[int(self.tableau_i[k])]),float(self.tableau_c[k]) * float(vecteur_a.vecteur[int(self.tableau_i[k])]))
+				somme += float(self.tableau_c[k]) * float(vecteur_a.vecteur[int(self.tableau_i[k])])
+				print "somme %f"%(somme)
 			res.append(somme)
 		return res
 
+
 	def produit_transpose(self,vecteur_a):
 		res=[]
+		for i in range(0,self.nb_colonne ,1):
+			res.append(0.0)
 		for i in range(0,self.nb_colonne,1):
-			res.append(0)
-		for i in range(0,self.nb_colonne,1):
+		#	print "valeur de i %d "%(i)
 			for j in range(int(self.tableau_l[i]),int(self.tableau_l[i+1]),1):
+		#		print "valeur de j %d "%(j)
 				print "self.tableau_i[j]) %d self.tableau_c[j] %f vecteur_a.vecteur[i] %f \n"%(int(self.tableau_i[j]),float(self.tableau_c[j]),float(vecteur_a.vecteur[i]))
+		#		print res[int(self.tableau_i[j])]
 				res[int(self.tableau_i[j])] += float(self.tableau_c[j]) * float(vecteur_a.vecteur[i])
 		return res
 
@@ -44,16 +49,13 @@ def get_matrix_from_file(fileName):
 		chiffre_lu =lignes[i].strip("\n").strip('\r').split('	')
 		chiffre_gauche = chiffre_lu[0]
 		chiffre_droit = chiffre_lu[1]
-	
 		#pour l\'initialisation
 		if chiffre_stocke == -1:
 			chiffre_stocke = chiffre_gauche
 		
 		if chiffre_gauche != chiffre_stocke:
-			tmp = int(chiffre_gauche) - (int(chiffre_stocke) + 1 )
-			print("tmp %d ")%(tmp)
-			if( tmp > 0):
-				print "yo"
+			tmp = int(chiffre_gauche) - (int(chiffre_stocke) +1 )
+			if( tmp >= 0):
 				for i in range(0,tmp,1):
 					table_l.append(table_l[-1])
 			for j in range(0,compteur_chiffre_gauche ,1):
@@ -63,8 +65,14 @@ def get_matrix_from_file(fileName):
 			chiffre_stocke = chiffre_gauche
 		compteur_chiffre_gauche+=1
 		table_i.append(chiffre_droit)
+
 	for i in range(0,compteur_chiffre_gauche,1):
 		table_c.append(1/(float)(compteur_chiffre_gauche))
+	if(int(chiffre_stocke) < nb_colonne -1):
+		print "rami\n"
+		for i in range(int(chiffre_stocke),nb_colonne,1):
+			table_l.append(table_l[-1])
+	
 	table_l.append(len(table_c))
 	
 	return table_c,table_l,table_i,nb_colonne
