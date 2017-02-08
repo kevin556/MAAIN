@@ -22,13 +22,15 @@ class Matrice(object):
 
 	def produit_transpose(self,vecteur_a):
 		res=[]
-		tmp =0
+		tmp = 0
 		for i in range(0,self.nb_colonne ,1):
 			res.append(0.0)
+	
 		for i in range(0,self.nb_colonne,1):
 			for j in range(int(self.tableau_l[i]),int(self.tableau_l[i+1]),1):
 				res[int(self.tableau_i[j])] +=float(float(self.tableau_c[j]) * float(vecteur_a.vecteur[tmp]))
-			tmp= tmp +1
+			if (int(self.tableau_l[i+1]) - int(self.tableau_l[i]) )> 0:
+				tmp= tmp +1
 		return res
 
 def get_matrix_from_file(fileName):

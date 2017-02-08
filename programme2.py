@@ -20,10 +20,17 @@ def pagerank_zero(matrice,sommet_depart,epsilon):
 			break
 	
 if len(argv) == 4:
-	sommet_depart = int(argv[2])
-	epsilon = float(argv[3])
 	res = []
 	m = Matrice(argv[1])
-	pagerank_zero(m,sommet_depart,epsilon)
+	if int(argv[2]) < m.nb_colonne:
+		sommet_depart = int(argv[2])
+		epsilon = float(argv[3])
+		pagerank_zero(m,sommet_depart,epsilon)
+	elif int(argv[2]) == m.nb_colonne:
+		sommet_depart = int(argv[2]) - 1
+		epsilon = float(argv[3])
+		pagerank_zero(m,sommet_depart,epsilon)
+	else:
+		print "mauvais sommet depart"
 else:
 	print "usage ./programme fichier_source sommet_depart epsilon"
