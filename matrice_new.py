@@ -54,13 +54,14 @@ def get_matrix_from_file(fileName):
 			chiffre_stocke = chiffre_gauche
 		
 		if chiffre_gauche != chiffre_stocke:
+			for j in range(0,compteur_chiffre_gauche ,1):
+				table_c.append(1/(float)(compteur_chiffre_gauche))
+			table_l.append(table_l[-1]+compteur_chiffre_gauche)
 			tmp = int(chiffre_gauche) - (int(chiffre_stocke) +1 )
 			if( tmp >= 0):
 				for i in range(0,tmp,1):
 					table_l.append(table_l[-1])
-			for j in range(0,compteur_chiffre_gauche ,1):
-				table_c.append(1/(float)(compteur_chiffre_gauche))
-			table_l.append(table_l[-1]+compteur_chiffre_gauche)
+			
 			compteur_chiffre_gauche = 0
 			chiffre_stocke = chiffre_gauche
 		compteur_chiffre_gauche+=1

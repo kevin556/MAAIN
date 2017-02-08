@@ -11,13 +11,12 @@ def pagerank_zap(matrice,epsilon,sommet_depart,d):
 	v1 = Vecteur(matrice.nb_colonne,sommet_depart,"zap")
 	v2 = Vecteur(matrice.nb_colonne,sommet_depart)
 	zap = (((float(d)/float(n)) + (1 - float(d))))
-	print "zap %f" %(zap)
 	while(True):
 		compteur+=1
 		v1.vecteur = m.produit_transpose(v0)
 		for i in range(0,m.nb_colonne,1):
 			v1.vecteur[i]*= zap
-	#	print "vecteur iteration %d : %s\n"%(compteur,v1.vecteur)
+		print "vecteur iteration %d : %s\n"%(compteur,v1.vecteur)
 		v2.vecteur = v1.soustraction_vecteur(v0)
 		
 		if((v2.norme())>=epsilon):
