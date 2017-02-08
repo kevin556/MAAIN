@@ -9,11 +9,10 @@ class Matrice(object):
 	def produit_direct(self,vecteur_a):
 		n = int(self.nb_colonne)
 		res =[]
-		tmp= 0
-		for tmp in range(0,n,1):
+		for i in range(0,n,1):
 			somme = 0.0
 		#	print "difference %f %f \n"%(int(self.tableau_l[i]),int(self.tableau_l[i+1]))
-			for k in range(int(self.tableau_l[tmp]), int(self.tableau_l[tmp+1]) , 1):
+			for k in range(int(self.tableau_l[i]), int(self.tableau_l[i+1]) , 1):
 				print "%f * %f -> %f "%(float(self.tableau_c[k]),float(vecteur_a.vecteur[int(self.tableau_i[k])]),float(self.tableau_c[k]) * float(vecteur_a.vecteur[int(self.tableau_i[k])]))
 				somme += float(self.tableau_c[k]) * float(vecteur_a.vecteur[int(self.tableau_i[k])])
 		#		print "somme %f"%(somme)
@@ -24,11 +23,12 @@ class Matrice(object):
 	def produit_transpose(self,vecteur_a):
 		res=[]
 		tmp =0
-		for tmp in range(0,self.nb_colonne ,1):
+		for i in range(0,self.nb_colonne ,1):
 			res.append(0.0)
-		for tmp in range(0,self.nb_colonne,1):
-			for j in range(int(self.tableau_l[tmp]),int(self.tableau_l[tmp+1]),1):
+		for i in range(0,self.nb_colonne,1):
+			for j in range(int(self.tableau_l[i]),int(self.tableau_l[i+1]),1):
 				res[int(self.tableau_i[j])] +=float(float(self.tableau_c[j]) * float(vecteur_a.vecteur[tmp]))
+			tmp= tmp +1
 		return res
 
 def get_matrix_from_file(fileName):
