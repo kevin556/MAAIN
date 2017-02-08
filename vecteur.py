@@ -10,8 +10,6 @@ class Vecteur(object):
 #        	print "somme %f \n"%(somme)
         return sqrt(somme)
 
-
-
     def __getitem__(self,index):
         if(index < len(self.vecteur)):
             return self.vecteur[int(index)]
@@ -25,13 +23,16 @@ class Vecteur(object):
 
 	#self,sommet_depart,*arg
     def __init__(self,*arg):
+        nb_element = int(arg[0])
     	#print "taille de init %d\n"%(len(arg))
-        self.vecteur = [0] * arg[0]
+        self.vecteur = [0] * nb_element
         if(len(arg) == 2):
         	self.vecteur[int(arg[1])] = 1
+        if(len(arg) == 3):
+            for i in range(0,nb_element,1):
+                self.vecteur[i] = 1/float(nb_element)
         else:
         	self.vecteur[0] = 1
-
 
 
     def soustraction_vecteur(self,vecteur_b):

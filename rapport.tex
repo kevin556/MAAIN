@@ -1,0 +1,50 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{graphicx}
+
+\renewcommand{\headrulewidth}{1pt}
+\fancyhead[L]{\textbf{Mode d'emploi du }} 
+\fancyhead[R]{Kevin Youna Rami Ben Mohamed Moncef Sekhsoukh}
+
+
+\begin{document}
+	\section{Explication des programmes}
+	\subsection{programme.py}
+	\paragraph{
+		Le programme ./programme.py s'utilise avec 3 arguments : 
+		\begin{description}
+			\item Le fichier source c'est à dire le fichier depuis lequel on va charger la matrice sous format txt.
+			\item Le sommet de d\'epart est le sommet pour lequel on aura la valeur 1 dans la liste mod\'elisant le vecteur.
+			\item Le nombre de pas est le nombre d'it\'eration pour lequel on va faire le calcul $\ M^\top \times Vn $\ avec n \'egal au nombre de pas.
+		\end{description}
+		\begin{center} 
+			\itshape{usage ./programme fichier_source sommet_depart nombre_de_pas}
+		\end{center}}
+	\subsection{programme2.py}
+	\paragraph{
+		Le programme ./programme2.py s'utilise avec 3 arguments:
+		\begin{itemize}
+			\item Le fichier source c'est à dire le fichier depuis lequel on va charger la matrice sous format txt
+			\item Le sommet de d\'epart est le sommet pour lequel on aura la valeur 1 dans la liste mod\'elisant le vecteur
+			\item Epsilon \'etant la valeur pour laquelle on va arr\'eter le calcul
+		\end{itemize}
+		\begin{center} 
+			\textit{usage ./programme fichier_source sommet_depart epsilon}
+		\end{center}}
+	\subsection{programme3.py}
+	\paragraph{
+		Le programme ./programme3.py s'utilise avec 4 arguments:
+		\begin{itemize}
+			\item Le fichier source c'est à dire le fichier depuis lequel on va charger la matrice sous format txt
+			\item Le sommet de d\'epart est le sommet pour lequel on aura la valeur 1 dans la liste mod\'elisant le vecteur
+			\item Epsilon \'eant la valeur pour laquelle on va arr\'eter le calcul
+			\item zap \'etant la valeur du facteur zap
+		\end{itemize}
+			\begin{center} 
+				\textit{usage ./programme fichier_source sommet_depart epsilon zap}
+			\end{center}}
+\end{document}

@@ -22,15 +22,13 @@ class Matrice(object):
 
 	def produit_transpose(self,vecteur_a):
 		res=[]
+		tmp =0
 		for i in range(0,self.nb_colonne ,1):
 			res.append(0.0)
 		for i in range(0,self.nb_colonne,1):
-		#	print "valeur de i %d "%(i)
 			for j in range(int(self.tableau_l[i]),int(self.tableau_l[i+1]),1):
-		#		print "valeur de j %d "%(j)
-		#		print "self.tableau_i[j]) %d self.tableau_c[j] %f vecteur_a.vecteur[i] %f \n"%(int(self.tableau_i[j]),float(self.tableau_c[j]),float(vecteur_a.vecteur[i]))
-		#		print res[int(self.tableau_i[j])]
-				res[int(self.tableau_i[j])] += float(self.tableau_c[j]) * float(vecteur_a.vecteur[i])
+				res[int(self.tableau_i[j])] +=float(float(self.tableau_c[j]) * float(vecteur_a.vecteur[tmp]))
+			tmp= tmp +1
 		return res
 
 def get_matrix_from_file(fileName):
@@ -69,7 +67,6 @@ def get_matrix_from_file(fileName):
 	for i in range(0,compteur_chiffre_gauche,1):
 		table_c.append(1/(float)(compteur_chiffre_gauche))
 	if(int(chiffre_stocke) < nb_colonne -1):
-		print "rami\n"
 		for i in range(int(chiffre_stocke),nb_colonne,1):
 			table_l.append(table_l[-1])
 	

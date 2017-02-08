@@ -18,7 +18,7 @@ def pagerank_zero(matrice,sommet_depart,epsilon):
 			v0.vecteur = m.produit_transpose(v1)
 		else:
 			break
-
+	
 if len(argv) == 4:
 	sommet_depart = int(argv[2])
 	epsilon = float(argv[3])
