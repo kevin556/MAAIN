@@ -2,10 +2,8 @@
 # -*- coding: utf-8 -*-
 import requests
 from bs4 import BeautifulSoup
+from unidecode import unidecode
 
-urls =[]
-soups =[]
-mots = []
 
 delete_list = ["et","le", "la", "les",
 			"un", "une", "a", "en", "sa", "son", "ses", "ma", "mon", "mes",
@@ -13,30 +11,13 @@ delete_list = ["et","le", "la", "les",
 			"cet", "cette", "ceux", "celui", "celle", "ca", "pas", "rien",
 			"aucun", ""]
 
-
-def accentControl(oldStr):
-	newStr = oldStr
-	newStr = newStr.replace('à', 'a')
-	newStr = newStr.replace("è", "e")
-	newStr = newStr.replace("é", "e")
-	newStr = newStr.replace("ù", "u")
-	newStr = newStr.replace("ç", "c")
-	newStr = newStr.replace("ï", "i")
-	newStr = newStr.replace("ô", "o")
-	newStr = newStr.replace("ê", "e")
-	newStr = newStr.replace("â", "a")
-	newStr = newStr.replace(".", "")
-	newStr = newStr.replace(",", "")
-	newStr = newStr.replace("\\", "")
-	newStr = newStr.replace("œ", "o")
-	return newStr
-
-
-#print accentControl("Moààààncéf")
+#addresse ="32 rue d'Athènes Paris France Île-de-france Éve"
+#print unidecode(addresse.decode('utf-8'))
 
 urls =[]
 soups =[]
 mots = []
+tmp_liste=[]
 
 for i in range(1,11):
     urls.append('https://fr.wiktionary.org/wiki/Wiktionnaire:10000-wp-fr-'+str(i)+'000')
@@ -48,14 +29,19 @@ for url in urls :
 for soup in soups:
     mots.append(soup.find_all("div",{"id":"mw-content-text"}))
     
-myfile = open("wiki.txt", "w")
+myfile = open("dictionnaire.txt", "w+")
 
 for item in mots:
     for i in item:
         for j in i.find_all('ul'):
             for k in j.find_all('li'):
                 for m in k.find_all('a'):
-                	tmp = accentControl(m.text.encode('utf-8')).lower().strip()
-                	if tmp not in delete_list:
-                		myfile.write(tmp+'\n')
+                	tmp = unidecode(m.text.encode('utf-8').strip().decode('utf-8')).lower()
+                	if tmp not in delete_list and tmp not in tmp_liste and tmp.isalpha():
+                		tmp_liste.append(tmp)
+
+
+tmp_liste.sort()
+for item in tmp_liste:
+	myfile.write(item+'\n')
 
