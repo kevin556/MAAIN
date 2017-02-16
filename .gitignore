@@ -2,3 +2,9 @@
 *.pdf
 *.log
 *.aux
+*~
+.DS_Store
+.pyc
+frwiki-latest-stub-articles1.xml
+.old
+.pdf
