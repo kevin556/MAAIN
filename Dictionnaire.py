@@ -8,7 +8,7 @@ from unidecode import unidecode
 delete_list = ["et","le", "la", "les",
 			"un", "une", "a", "en", "sa", "son", "ses", "ma", "mon", "mes",
 			"ta", "ton", "tes", "de", "du", "des", "au", "aux", "etc", "ce",
-			"cet", "cette", "ceux", "celui", "celle", "ca", "pas", "rien",
+			"cet", "cette", "ceux", "celui", "celle", "ca", "ça", "pas", "rien",
 			"aucun", ""]
 
 #addresse ="32 rue d'Athènes Paris France Île-de-france Éve"

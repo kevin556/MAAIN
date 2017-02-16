@@ -28,9 +28,7 @@ class Matrice(object):
 	
 		for i in range(0,self.nb_colonne,1):
 			for j in range(int(self.tableau_l[i]),int(self.tableau_l[i+1]),1):
-				res[int(self.tableau_i[j])] +=float(float(self.tableau_c[j]) * float(vecteur_a.vecteur[tmp]))
-			if (int(self.tableau_l[i+1]) - int(self.tableau_l[i]) )> 0:
-				tmp= tmp +1
+				res[int(self.tableau_i[j])] +=float(float(self.tableau_c[j]) * float(vecteur_a.vecteur[i]))
 		return res
 
 def get_matrix_from_file(fileName):
