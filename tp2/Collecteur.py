@@ -3,6 +3,7 @@
 
 import xml.etree.cElementTree as ET
 from sys import argv
+from Dictionnaire import get_word_file
 
 tmp = False
 tmp2 = False
@@ -30,24 +31,27 @@ def do_the_harlem_shake(fileName):
                 #on est dans la page
                 if '<title>' in line and '</title>' in line:
                     inputbuffer+=line.replace("<title>","").replace("</title>","").strip()
-                if 'text>' in line:
+                if 'text' in line:
+                    inputbuffer+=line.replace("<text>","").strip()
                     tmp2=True
                 if tmp2:
-                    inputbuffer+=line.replace("<text>","").strip()
+                    print line
+                    inputbuffer+=line
                 if '</text>' in line:
                     inputbuffer+=line.replace("</text>","").strip()
                     tmp2 = False
             if '</page>' in line:
                 print "inputbuffer %s" %(inputbuffer)
+                break
                 inputbuffer =""
                 tmp = False
             
-
-if len(argv) == 2 :
-    import_dico()
-    do_the_harlem_shake(argv[1])
-else:
-    print "mauvais nombre d'arguments"
+if __name__ == '__main__':
+    if len(argv) == 2 :
+        import_dico()
+        do_the_harlem_shake(argv[1])
+    else:
+        print "mauvais nombre d'arguments\nusage ./Collecteur filename"
 
 
 '''
