@@ -14,8 +14,10 @@ delete_list = ["et","le", "la", "les",
 
 #addresse ="32 rue d'Athènes Paris France Île-de-france Éve"
 #print unidecode(addresse.decode('utf-8'))
-def get_word_file(delete_list,filename):
+def get_word_file(filename,list=None):
     urls =[];soups =[];mots = [];tmp_liste=[]
+    if list == None:
+        list = delete_list
 
     for i in range(1,11):
         urls.append('https://fr.wiktionary.org/wiki/Wiktionnaire:10000-wp-fr-'+str(i)+'000')
@@ -35,7 +37,7 @@ def get_word_file(delete_list,filename):
                 for k in j.find_all('li'):
                     for m in k.find_all('a'):
                     	tmp = unidecode(m.text.encode('utf-8').strip().decode('utf-8')).lower()
-                    	if tmp not in delete_list and tmp not in tmp_liste and tmp.isalpha() : #and len(tmp)> 1 -> constante mathematique ?
+                    	if tmp not in list and tmp not in tmp_liste and tmp.isalpha() : #and len(tmp)> 1 -> constante mathematique ?
                     		tmp_liste.append(tmp)
     tmp_liste.sort()
     for item in tmp_liste:
@@ -44,6 +46,6 @@ def get_word_file(delete_list,filename):
 
 if __name__ == '__main__':
     if(len(argv)==2):
-        get_word_file(delete_list,argv[1])
+        get_word_file(argv[1],delete_list)
     else:
         print 'mauvaise utilisation\nusage ./Dictionnaire.py filename'
