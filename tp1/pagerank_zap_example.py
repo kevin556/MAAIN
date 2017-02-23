@@ -32,7 +32,7 @@ def pagerank_zap(matrice,epsilon,d):
 if len(argv) == 4:
 	epsilon = float(argv[2])
 	d=float(argv[3])
-	if(d >= 0.1 or d<=0.2):
+	if(d >= 0.1 and d<=0.2):
 		res = []
 		m = Matrice(argv[1])
 		pagerank_zap(m,epsilon,d)
