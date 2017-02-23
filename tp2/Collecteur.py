@@ -6,11 +6,15 @@ from sys import argv
 from Dictionnaire import get_word_file
 from itertools import izip
 from unidecode import unidecode
+import copy
+
 
 class Collecteur:
     mots = []
     titre_id = {}   #Structure (titre , id)
     mot_page ={}   #Structure (mot , {idpage:apparition})
+    mot_page_frequence ={}   #Structure (mot , {idpage:frequence})
+
 
     #quand est ce que c'est appele ?
     def process_buffer(buf):
@@ -65,8 +69,11 @@ class Collecteur:
                 
 
 
-    def analyse_page(self,idp,text_to_analyse,dico):
+    def analyse_page(self,idp,text_to_analyse):
         print 'TEXT', text_to_analyse
+        page_length = len(str.split(text_to_analyse," "))
+        print 'TOTAL', page_length
+
         for mot in str.split(text_to_analyse," "):
             if mot in self.mots:
                 #Si le mot existe dans la structure mot_page
@@ -79,12 +86,25 @@ class Collecteur:
                 else:   
                     self.mot_page[mot] = {}
                     self.mot_page[mot][idp] = 1
+        dic = copy.deepcopy(self.mot_page.copy())
+        self.mot_page_frequence = self.rami_money(page_length,dic)    
+                
+    def rami_money(self, total, dic):
+        for mot in dic:
+            for idpage in dic[mot]:
+                dic[mot][idpage] = (float)(dic[mot][idpage]) / total
+        return dic
+
+
+
 
 
 
 
     def resultat(self):
         print 'RESULTAT', self.mot_page
+        print 'FREQUENCE', self.mot_page_frequence
+
                         
 #fonction a travailler car certains mots ne doivent pas être pris en compte
 def format_mot(mot):
