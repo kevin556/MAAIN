@@ -37,7 +37,7 @@ def get_word_file(filename,list=None):
                 for k in j.find_all('li'):
                     for m in k.find_all('a'):
                     	tmp = unidecode(m.text.encode('utf-8').strip().decode('utf-8')).lower()
-                    	if tmp not in list and tmp not in tmp_liste and tmp.isalpha() : #and len(tmp)> 1 -> constante mathematique ?
+                    	if tmp not in list and tmp not in tmp_liste and tmp.isalpha() and len(tmp)> 2 :
                     		tmp_liste.append(tmp)
     tmp_liste.sort()
     for item in tmp_liste:

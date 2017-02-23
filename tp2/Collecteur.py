@@ -9,11 +9,9 @@ from unidecode import unidecode
 
 class Collecteur:
     mots = []
-    titre = {}
-    dico = {}
-    dico_tmp={}
-    dico_frequence={}
-    index_courant = 0
+    titre_id = {}   #Structure (titre , id)
+    mot_page ={}   #Structure (mot , {idpage:apparition})
+
     #quand est ce que c'est appele ?
     def process_buffer(buf):
         tnode = ET.fromstring(buf)
@@ -26,72 +24,79 @@ class Collecteur:
     def import_dico(self,filename_dico = 'dictionnaire.txt'):
         self.mots = [line.rstrip('\n') for line in open(filename_dico)]   
 
-    def create_tmp_dico(self):
+    '''def create_tmp_dico(self):
         tmp = [0] * len(self.mots)
-        self.dico_tmp = dict(izip(self.mots, tmp))
+        self.dico_tmp = dict(izip(self.mots, tmp))'''
     
     def do_the_harlem_shake(self,fileName):
         #Moncef pense que ça ne plantera pas
-        tmp =False;tmp2=False;tmp3 = True
+        id_get = False;tmp = False;tmp2 = False
+        inputbuffer="";titre="";idp=""
+
         with open(str(fileName),'rb') as inputfile:
-            inputbuffer=""
-            titre=""
-            id=""
-            for line in inputfile:
-                if '<page>' in line:
-                    #on entre dans la page
+            append = False
+            for line in inputfile: 
+                if '<page>' in line or tmp:
                     tmp = True
-                if tmp:
-                    #on est dans la page
+                    #on entre dans la page
                     if '<title>' in line and '</title>' in line:
-                        titre+=line.replace("<title>","").replace("</title>","").strip()
-                    if '<id>' in line and '</id>' in line:
-                        if tmp3:
-                            id+=line.replace("<id>","").replace("</id>","").strip()
-                        tmp3 = False
-                        print("id %s \n")%(id)
-                    if 'text' in line:
-                        inputbuffer+=line.replace("<text>","").strip()
-                        tmp2=True
-                    if tmp2:
-                        print line
-                        inputbuffer+=line
-                    if '</text>' in line:
-                        inputbuffer+=line.replace("</text>","").strip()
+                        titre = line.replace('<title>',"").replace('</title>',"").strip()
+                    if '<id>' in line and '</id>' in line and not id_get:
+                        idp = line.replace('<id>',"").replace("</id>","").strip()
+                        id_get = True
+                    if '<text>' in line and '</text>' in line:
+                        inputbuffer+= line.replace('<text>',"").replace('</text>',"").strip()
+                    
+                    elif '<text' in line or tmp2:
+                        tmp2 = True
+                        inputbuffer+= line.replace('<text>',"").replace("</text>","").strip()+" "
+                    
+                    if '</text>' in line and tmp2:
+                        inputbuffer+= line.replace('<text>',"").replace("</text>","").strip()+" "
                         tmp2 = False
+
                 if '</page>' in line:
-                    self.analyse_page(id,inputbuffer)
-                    break
-                    tmp3 = True
-                    titre = ""
-                    id=""
-                    inputbuffer = ""
-                    tmp = False
-
-
-
-    def analyse_page(self,id,text_to_analyse):
-        compteur_mot = 0
-        compteur_text = 0
-        for mot in str.split(text_to_analyse," "):
-            if format_mot(mot) in self.dico:
-                compteur_mot = compteur_mot+1
-                #il faut trouver comment acceder a la liste
-                self.dico[mot].value = self.dico[mot].value+1
+                    print "titre %s \n"%(titre)
+                    print "id %s \n"%(idp)
+                    print "text %s \n"%(inputbuffer)
+                    self.analyse_page(idp,inputbuffer+" "+titre)
+                    id_get = False;tmp = False;tmp2 = False
+                    inputbuffer="";titre="";idp=""
                 
 
-        print compteur_mot
-         
+
+    def analyse_page(self,idp,text_to_analyse,dico):
+        print 'TEXT', text_to_analyse
+        for mot in str.split(text_to_analyse," "):
+            if mot in self.mots:
+                #Si le mot existe dans la structure mot_page
+                if mot in self.mot_page:
+                    #Si l'ID de la page existe on incrémente SINON on rajoute l'id avec un compteur = 1
+                    if idp in self.mot_page[mot]:
+                        self.mot_page[mot][idp] += 1
+                    else:
+                        self.mot_page[mot][idp] = 1
+                else:   
+                    self.mot_page[mot] = {}
+                    self.mot_page[mot][idp] = 1
+
+
+
+
+    def resultat(self):
+        print 'RESULTAT', self.mot_page
+                        
 #fonction a travailler car certains mots ne doivent pas être pris en compte
 def format_mot(mot):
-    return mot.replace(" ","").replace("'","").replace(",","").strip()
+    return mot.replace(" ","").replace("'","").replace(",","").replace("l'","").strip()
 
 
 if __name__ == '__main__':
-    if(len(argv)==3):
+    if(len(argv)==2):
         a = Collecteur()
         a.import_dico()
-        a.create_tmp_dico()
-        a.do_the_harlem_shake(argv[2])
+        #a.create_tmp_dico()
+        a.do_the_harlem_shake(argv[1])
+        a.resultat()
     else:
         print("mauvaise utilisation\nusage:./Collecteur.py option filename")
