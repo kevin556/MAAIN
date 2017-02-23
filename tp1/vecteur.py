@@ -18,11 +18,12 @@ class Vecteur(object):
     def __str__(self):
         s=""
         for i in range(0,len(self.vecteur)):
-            s+="valeur de i %d -> %d\n"%(i,self.vecteur[i])
+            s+="valeur de i %d -> %f\n"%(i,self.vecteur[i])
         return s
 
 	#self,sommet_depart,*arg
     def __init__(self,*arg):
+        print 'la'
         nb_element = int(arg[0])
     	#print "taille de init %d\n"%(len(arg))
         self.vecteur = [0] * nb_element
