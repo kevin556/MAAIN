@@ -33,7 +33,7 @@ class Collecteur:
         self.dico_tmp = dict(izip(self.mots, tmp))'''
     
     def do_the_harlem_shake(self,fileName):
-        #Moncef pense que ça ne plantera pas
+        #Moncef pense que ça ne plantera pas 
         id_get = False;tmp = False;tmp2 = False
         inputbuffer="";titre="";idp=""
 
@@ -47,6 +47,7 @@ class Collecteur:
                         titre = line.replace('<title>',"").replace('</title>',"").strip()
                     if '<id>' in line and '</id>' in line and not id_get:
                         idp = line.replace('<id>',"").replace("</id>","").strip()
+                        self.titre_id[titre] = idp
                         id_get = True
                     if '<text>' in line and '</text>' in line:
                         inputbuffer+= line.replace('<text>',"").replace('</text>',"").strip()
@@ -103,7 +104,11 @@ class Collecteur:
 
     def resultat(self):
         print 'RESULTAT', self.mot_page
-        print 'FREQUENCE', self.mot_page_frequence
+        print '________________________________________________________________________________'
+        print 'FREQUENCE', self.mot_page_frequence        
+        print '________________________________________________________________________________'
+        print 'TITRE-ID', self.titre_id
+
 
                         
 #fonction a travailler car certains mots ne doivent pas être pris en compte
