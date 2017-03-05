@@ -71,6 +71,7 @@ class Collecteur:
                     id_get = False;tmp = False;tmp2 = False
                     inputbuffer="";titre="";idp=""
 
+    #ICI J'AI RECUPERE TOUT LES LIENS , A MODIFIER !
     def get_all_links(self,text):
         links = re.findall('\[(.*?)\]', text)
         return links
@@ -81,11 +82,18 @@ class Collecteur:
                 if i in self.titre_id:
                     value[n]= self.titre_id[i]
 
+    def tartiner_nutella(self):
+        myfile = open("graph_nutella.txt", "w+")
+        for key,value in self.graph_nutella.iteritems():
+            for n,i in enumerate(value):
+                myfile.write(key+" "+value[n]+'\n')
+
+
                         
     def analyse_page(self,idp,text_to_analyse):
-        print 'TEXT', text_to_analyse
+        #print 'TEXT', text_to_analyse
         page_length = len(str.split(text_to_analyse," "))
-        print 'TOTAL', page_length
+        #print 'TOTAL', page_length
 
         for mot in str.split(text_to_analyse," "):
             if mot in self.mots:
@@ -110,10 +118,6 @@ class Collecteur:
 
 
 
-
-
-
-
     def resultat(self):
         print 'RESULTAT', self.mot_page
         print '________________________________________________________________________________'
@@ -130,7 +134,7 @@ class Collecteur:
 
 
                         
-#fonction a travailler car certains mots ne doivent pas être pris en compte
+#fonction a travailler car certains mots ne doivent pas être pris en compte ----> RAMI WHERE THE HELL ARE YOU ?
 def format_mot(mot):
     return mot.replace(" ","").replace("'","").replace(",","").replace("l'","").strip()
 
@@ -144,6 +148,7 @@ if __name__ == '__main__':
         a.resultat()
         a.update_graph()
         a.resultat2()
+        a.tartiner_nutella()
 
     else:
         print("mauvaise utilisation\nusage:./Collecteur.py option filename")
