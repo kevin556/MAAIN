@@ -73,7 +73,7 @@ class Collecteur:
 
     #ICI J'AI RECUPERE TOUT LES LIENS , A MODIFIER !
     def get_all_links(self,text):
-        links = re.findall('\[(.*?)\]', text)
+        links = re.findall("\[\[(.*?)\]\]", s)
         return links
 
     def update_graph(self):
