@@ -7,13 +7,15 @@ from Dictionnaire import get_word_file
 from itertools import izip
 from unidecode import unidecode
 import copy
+import re
 
 
 class Collecteur:
     mots = []
     titre_id = {}   #Structure (titre , id)
-    mot_page ={}   #Structure (mot , {idpage:apparition})
-    mot_page_frequence ={}   #Structure (mot , {idpage:frequence})
+    mot_page ={}   #Structure (mot : {idpage:apparition})
+    mot_page_frequence ={}   #Structure (mot : {idpage:frequence})
+    graph_nutella ={} #structure {idpage : [liens en titre]} les titres on va les traduire en IDs via la structure titre_id
 
 
     #quand est ce que c'est appele ?
@@ -65,11 +67,21 @@ class Collecteur:
                     print "id %s \n"%(idp)
                     print "text %s \n"%(inputbuffer)
                     self.analyse_page(idp,inputbuffer+" "+titre)
+                    self.graph_nutella[idp] = self.get_all_links(inputbuffer)
                     id_get = False;tmp = False;tmp2 = False
                     inputbuffer="";titre="";idp=""
-                
 
+    def get_all_links(self,text):
+        links = re.findall('\[(.*?)\]', text)
+        return links
 
+    def update_graph(self):
+        for key, value in self.graph_nutella.iteritems():
+            for n,i in enumerate(value):
+                if i in self.titre_id:
+                    value[n]= self.titre_id[i]
+
+                        
     def analyse_page(self,idp,text_to_analyse):
         print 'TEXT', text_to_analyse
         page_length = len(str.split(text_to_analyse," "))
@@ -108,6 +120,13 @@ class Collecteur:
         print 'FREQUENCE', self.mot_page_frequence        
         print '________________________________________________________________________________'
         print 'TITRE-ID', self.titre_id
+        print '________________________________________________________________________________'
+        print 'GRAPH_nutella', self.graph_nutella
+        
+
+    def resultat2(self):
+        print '________________________________________________________________________________'
+        print 'GRAPH_nutella_UPDATED', self.graph_nutella
 
 
                         
@@ -123,5 +142,8 @@ if __name__ == '__main__':
         #a.create_tmp_dico()
         a.do_the_harlem_shake(argv[1])
         a.resultat()
+        a.update_graph()
+        a.resultat2()
+
     else:
         print("mauvaise utilisation\nusage:./Collecteur.py option filename")
