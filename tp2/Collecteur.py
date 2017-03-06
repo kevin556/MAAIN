@@ -8,6 +8,12 @@ from itertools import izip
 from unidecode import unidecode
 import copy
 import re
+import string
+import unicodedata
+
+
+
+    
 
 
 
@@ -154,10 +160,18 @@ class Collecteur:
 
 
                         
-#fonction a travailler car certains mots ne doivent pas être pris en compte ----> RAMI WHERE THE HELL ARE YOU ?
+#fonction ok certains mots ne doivent pas être pris en compte 
 def format_mot(mot):
-    return mot.replace(" ","").replace("'","").replace(",","").replace("l'","").strip()
-
+    wolrd=""
+    wl=""
+    if isinstance(mot,str):
+        mot = unicode(mot,"utf8","replace")
+        mot = unicodedata.normalize('NFD',mot)
+        mot=mot.encode('ascii','ignore')
+    for ch in mot:
+        if(ch in string.ascii_letters):
+            wl+=ch
+    return wl.split()
 
 if __name__ == '__main__':
     if len(argv)==2 :
