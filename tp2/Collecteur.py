@@ -75,7 +75,7 @@ class Collecteur:
                 if self.trump(i) in self.titre_id:
                 	try:
                 		value[n]= self.titre_id[i]
-					except Exception as e:
+					except KeyError as e:
                 		continue
                 	
     def tartiner_nutella(self):
