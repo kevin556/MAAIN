@@ -1,7 +1,15 @@
-mot1
-	idpage1 1
-	idpage99 2
-	idpage100 2
-mot2
-	idpage1 3
-	idpage2 4
+aboutit
+	99 1
+	10 1
+Antoine
+	10 1
+absence
+	99 2
+	10 2
+	3 1
+abraham
+	3 1
+kevin
+	3 1
+abdallah
+	10 1
