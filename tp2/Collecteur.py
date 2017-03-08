@@ -45,7 +45,7 @@ class Collecteur:
             if event == "end" and elem.tag == tag+"page":
                 titre = elem.findtext(tag+"title").encode('utf-8')
                 idp = elem.findtext(tag+"id")
-                self.titre_id[titre] = idp
+                self.titre_id[self.trump(titre)] = idp
                 a = elem.find(tag+"revision")
                 inputbuffer = a.findtext(tag+"text").encode('utf-8')
                 elem.clear()                
@@ -64,7 +64,7 @@ class Collecteur:
         for link in links:
             if ':' in link:
                 links.remove(link)
-            elif '|' in link:
+            if '|' in link:
                 links.remove(link)
                 links.append(link.split('|')[0])
         return links
@@ -73,10 +73,10 @@ class Collecteur:
         for key, value in self.graph_nutella.iteritems():
             for n,i in enumerate(value):
                 if self.trump(i) in self.titre_id:
-                	try:
-                		value[n]= self.titre_id[i]
-					except KeyError as e:
-                		continue
+                    try:
+                        value[n]= self.titre_id[self.trump(i)]
+                    except KeyError:
+                        continue
                 	
     def tartiner_nutella(self):
         myfile = open("graph_nutella.txt", "w+")
@@ -84,17 +84,17 @@ class Collecteur:
             for n,i in enumerate(value):
                 try:
                 	myfile.write(key+" "+value[n]+'\n')
-                except Exception as e:
-                		continue
+                except KeyError :
+                	continue
 
     def granola_de_prince(self):
-     myfile = open("graph_granola.txt", "w+")
+        myfile = open("graph_granola.txt", "w+")
         for key,value in self.mot_page_frequence.iteritems():
             for n,i in enumerate(value):
                 try:
                 	myfile.write(key+" "+value[n]+'\n')
-                except Exception as e:
-                		continue
+                except KeyError:
+                	continue
                         
     def analyse_page(self,idp,text_to_analyse):
         #print 'TEXT', text_to_analyse
