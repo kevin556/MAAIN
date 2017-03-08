@@ -10,6 +10,7 @@ import copy
 import re
 
 
+
 class Collecteur:
     mots_liste = []
     mots ={}
