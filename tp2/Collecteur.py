@@ -10,10 +10,9 @@ import copy
 import re
 
 
-
-
 class Collecteur:
-    mots = []
+    mots_liste = []
+    mots ={}
     titre_id = {}   #Structure (titre , id)
     mot_page ={}   #Structure (mot : {idpage:apparition})
     mot_page_frequence ={}   #Structure (mot : {idpage:frequence})
@@ -26,9 +25,15 @@ class Collecteur:
         import_dico(filename)
 
     def import_dico(self,filename_dico = 'dictionnaire.txt'):
-        self.mots = [line.rstrip('\n') for line in open(filename_dico)]   
+        self.mots_liste = [line.rstrip('\n') for line in open(filename_dico)]
+        for mot in self.mots_liste:
+            self.mots[mot] = 1
 
-    
+
+    def trump(self,text):
+        text=  unidecode(text.decode('utf-8')).encode('utf-8').lower()
+        return text
+
     def do_the_harlem_shake(self,fileName):
         titre="";idp="";inputbuffer="";
         tag="{http://www.mediawiki.org/xml/export-0.10/}"
@@ -42,21 +47,31 @@ class Collecteur:
                 self.titre_id[titre] = idp
                 a = elem.find(tag+"revision")
                 inputbuffer = a.findtext(tag+"text").encode('utf-8')
-                print idp , titre
-                elem.clear()
+                elem.clear()                
+                print '<'+idp+'>', titre
                 self.analyse_page(idp,inputbuffer+" "+titre)
                 self.graph_nutella[idp] = self.get_all_links(inputbuffer)
                 titre="";idp="";inputbuffer="";
 
-    #ICI J'AI RECUPERE TOUT LES LIENS , A MODIFIER !
+
     def get_all_links(self,text):
-        links = re.findall("\[\[(.*?)\]\]", text)
+        links=[]
+        tmp = str.split(text,'\n')
+        for elem in tmp:
+            links= links + (re.findall("\[\[(.*?)\]\]", elem))
+        
+        for link in links:
+            if ':' in link:
+                links.remove(link)
+            elif '|' in link:
+                links.remove(link)
+                links.append(link.split('|')[0])
         return links
 
     def update_graph(self):
         for key, value in self.graph_nutella.iteritems():
             for n,i in enumerate(value):
-                if i in self.titre_id:
+                if self.trump(i) in self.titre_id:
                     value[n]= self.titre_id[i]
 
     def tartiner_nutella(self):
@@ -64,35 +79,41 @@ class Collecteur:
         for key,value in self.graph_nutella.iteritems():
             for n,i in enumerate(value):
                 myfile.write(key+" "+value[n]+'\n')
-
-
                         
     def analyse_page(self,idp,text_to_analyse):
         #print 'TEXT', text_to_analyse
-        tmp = str.split(text_to_analyse," ")
-        page_length = len(tmp)
+        #tmp = str.split(text_to_analyse," ")
+        #page_length = len(tmp)
         #print 'TOTAL', page_length
-        for elem in tmp :
-            if elem not in self.mots:
-                tmp.remove(elem)
-
-        for mot in tmp:
-            #Si le mot existe dans la structure mot_page
-            if mot in self.mot_page:
-                #Si l'ID de la page existe on incrémente SINON on rajoute l'id avec un compteur = 1
-                #idp -> id de page
-                if idp in self.mot_page[mot]:
-                    self.mot_page[mot][idp] += 1
+        tmp2 = str.split(text_to_analyse,"\n")
+        for item in tmp2:
+            tmp3 = str.split(item," ")
+            for i in tmp3:
+                if " " in i or not i.isalpha():
+                    tmp3.remove(i)
                 else:
-                    self.mot_page[mot][idp] = 1
-                tmp.remove(mot)
-            else:   
-                self.mot_page[mot] = {}
-                self.mot_page[mot][idp] = 1
-                tmp.remove(mot)
-              
-        dic = copy.deepcopy(self.mot_page.copy())
-        self.mot_page_frequence = self.rami_money(page_length,dic)    
+                    i = self.trump(i)
+            for mot in tmp3:
+                #Si le mot existe dans notre dictionnaire de mots
+                try:
+                    if self.mots[mot.lower()] == 1:                    
+                        #Si le mot existe dans la structure mot_page
+                        if mot in self.mot_page:
+                            #Si l'ID de la page existe on incrémente SINON on rajoute l'id avec un compteur = 1
+                            if idp in self.mot_page[mot]:
+                                self.mot_page[mot][idp] += 1
+                            else:
+                                self.mot_page[mot][idp] = 1
+                        else:   
+                            self.mot_page[mot] = {}
+                            self.mot_page[mot][idp] = 1
+                except KeyError:
+                    continue
+
+                tmp3.remove(mot)
+
+        #dic = self.mot_page
+        #self.mot_page_frequence = self.rami_money(page_length,dic)    
                 
     def rami_money(self, total, dic):
         for mot in dic:
@@ -101,9 +122,8 @@ class Collecteur:
         return dic
 
 
-
     def resultat(self):
-        print 'RESULTAT', self.mot_page
+        print 'MOT-PAGE', self.mot_page
         print '________________________________________________________________________________'
         print 'FREQUENCE', self.mot_page_frequence        
         print '________________________________________________________________________________'
@@ -111,10 +131,10 @@ class Collecteur:
         print '________________________________________________________________________________'
         print 'GRAPH_nutella', self.graph_nutella
         
-
     def resultat2(self):
         print '________________________________________________________________________________'
         print 'GRAPH_nutella_UPDATED', self.graph_nutella
+
 
                         
 #fonction a travailler car certains mots ne doivent pas être pris en compte ----> RAMI WHERE THE HELL ARE YOU ?
