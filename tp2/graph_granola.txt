@@ -1,0 +1,7 @@
+mot1
+	idpage1 1
+	idpage99 2
+	idpage100 2
+mot2
+	idpage1 3
+	idpage2 4
