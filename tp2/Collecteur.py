@@ -73,13 +73,28 @@ class Collecteur:
         for key, value in self.graph_nutella.iteritems():
             for n,i in enumerate(value):
                 if self.trump(i) in self.titre_id:
-                    value[n]= self.titre_id[i]
-
+                	try:
+                		value[n]= self.titre_id[i]
+					except Exception as e:
+                		continue
+                	
     def tartiner_nutella(self):
         myfile = open("graph_nutella.txt", "w+")
         for key,value in self.graph_nutella.iteritems():
             for n,i in enumerate(value):
-                myfile.write(key+" "+value[n]+'\n')
+                try:
+                	myfile.write(key+" "+value[n]+'\n')
+                except Exception as e:
+                		continue
+
+    def granola_de_prince(self):
+     myfile = open("graph_granola.txt", "w+")
+        for key,value in self.mot_page_frequence.iteritems():
+            for n,i in enumerate(value):
+                try:
+                	myfile.write(key+" "+value[n]+'\n')
+                except Exception as e:
+                		continue
                         
     def analyse_page(self,idp,text_to_analyse):
         #print 'TEXT', text_to_analyse
@@ -152,6 +167,7 @@ if __name__ == '__main__':
         a.update_graph()
         a.resultat2()
         a.tartiner_nutella()
+        a.granola_de_prince()
 
     else:
         print("mauvaise utilisation\nusage:./Collecteur.py option filename")
