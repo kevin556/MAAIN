@@ -1,0 +1,12 @@
+#!/bin/bash
+
+
+wget https://bootstrap.pypa.io/get-pip.py
+python get-pip.py
+pip install bs4
+pip install requests
+pip install beautifulSoup
+pip install unidecode
+
+scp youna@nivose.informatique.univ-paris-diderot.fr:/info/master2/Public/MAIN/frwiki.xml .
+./Collecteur.py fr.wiki

@@ -49,7 +49,7 @@ class Collecteur:
                 a = elem.find(tag+"revision")
                 inputbuffer = a.findtext(tag+"text").encode('utf-8')
                 elem.clear()                
-                #print '<'+idp+'>', titre
+                print '<'+idp+'>', titre
                 self.analyse_page(idp,inputbuffer+" "+titre)
                 self.graph_nutella[idp] = self.get_all_links(inputbuffer)
                 titre="";idp="";inputbuffer="";
