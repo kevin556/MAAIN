@@ -17,12 +17,39 @@ def enleve_doublon(source):
 		source[1:] -> pour ne pas avoir le nom de l'executable dans le tableau de sortie
 	'''
 	for i in source[1:]:
-		if i not in tmp and i not in delete_list:
-			tmp.append(i)
-	print tmp
+		#and not i.isdigit():
+		if i not in tmp and i not in delete_list :
+			tmp.append(i.lower())
+	return tmp
 
+'''
+	conception algo:
+		parcours du fichier a la recherche des mots de la requete.
+		on repere le mot a droite:
+			si ça correspond,on stocke les ids des pages dans lequel le premier mot apparait.
+		on parcoure a nouveau le fichier a la recherche du ou des autres mots.
+			une fois trouvé on enleve les mots qui n'apparaissent pas dans la seconde liste.
+			Pour les mots apparaissant plusieurs fois,on ajoute les apparitions des deux pages
+			dans le tableau res et on trie par rapport à cette fréquence.
 
+'''
 
+def algo_recherche(source,fichier_graphe):
+	dico_temp ={}
+	print "source %s"%(source)
+	f = open(fichier_graphe,"r")
+	for i in f:
+		if " " not in i :
+			if i.lower() in source:
+				dico_temp[i] 
+
+		'''
+		tmp = (f.readline()).split(" ")
+		if len(tmp)==1:
+			if tmp[0] in source:
+				print "la"
+		'''
+	return dico_temp
 
 
 if __name__ == '__main__':
@@ -31,4 +58,4 @@ if __name__ == '__main__':
 	elif len(argv)> 10 : 
 		print("erreur trop de mot pour la recherche")
 	else:
-		enleve_doublon(argv)
+		algo_recherche(enleve_doublon(argv),"/Users/kevin/Desktop/graph_maain/graph_granola.txt")
