@@ -1,15 +1,29 @@
-aboutit
-	99 1
-	10 1
-Antoine
-	10 1
-absence
-	99 2
-	10 2
-	3 1
-abraham
-	3 1
-kevin
-	3 1
-abdallah
-	10 1
+<root>
+<mot>
+	<contenu>aboutit</contenu>
+	<page id='99'>1</page>
+	<page id='10'>1</page>
+</mot>
+<mot>
+	<contenu>Antoine</contenu>
+	<page id='10'>1</page>
+</mot>
+<mot>
+	<contenu>absence</contenu>
+	<page id='99'>2</page>
+	<page id='10'>2</page>
+	<page id='3'>1</page>
+</mot>
+<mot>
+	<contenu>abraham</contenu>
+	<page id='3'>1</page>
+</mot>
+<mot>
+	<contenu>kevin</contenu>
+	<page id='3'>1</page>
+</mot>
+<mot>
+	<contenu>abdallah</contenu>
+	<page id='10'>1</page>
+</mot>
+</root>

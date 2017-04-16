@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 
 from sys import argv
-	
+import xml.etree.cElementTree as ET
+
+
 delete_list = ["et","le", "la", "les",
 			"un", "une", "a", "en", "sa", "son", "ses", "ma", "mon", "mes",
 			"ta", "ton", "tes", "de", "du", "des", "au", "aux", "etc", "ce",
@@ -37,19 +39,19 @@ def enleve_doublon(source):
 def algo_recherche(source,fichier_graphe):
 	dico_temp ={}
 	print "source %s"%(source)
-	f = open(fichier_graphe,"r")
-	for i in f:
-		if " " not in i :
-			if i.lower() in source:
-				dico_temp[i] 
+	
+	for motrecherche in source:
+	    context = ET.iterparse(fileName, events=("start", "end"))
+	    context = iter(context)
+	    event, root = context.next()
+	    for event, elem in context:
+	        if event == "end" and elem.tag == "mot":
+	            mot = elem.findtext("contenu").encode('utf-8')
+	            if mot == motrecherche:
+	              	for page in elem.iter('page'):
+	                	print page.attrib['id'] + " " + elem.findtext("page")
 
-		'''
-		tmp = (f.readline()).split(" ")
-		if len(tmp)==1:
-			if tmp[0] in source:
-				print "la"
-		'''
-	return dico_temp
+
 
 
 if __name__ == '__main__':

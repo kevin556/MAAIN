@@ -1,0 +1,166 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.10/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.10/ http://www.mediawiki.org/xml/export-0.10.xsd" version="0.10" xml:lang="fr">
+  <siteinfo>
+    <sitename>Wikipédia</sitename>
+    <dbname>frwiki</dbname>
+    <base>https://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Accueil_principal</base>
+    <generator>MediaWiki 1.29.0-wmf.13</generator>
+    <case>first-letter</case>
+    <namespaces>
+      <namespace key="-2" case="first-letter">Média</namespace>
+      <namespace key="-1" case="first-letter">Spécial</namespace>
+      <namespace key="0" case="first-letter" />
+      <namespace key="1" case="first-letter">Discussion</namespace>
+      <namespace key="2" case="first-letter">Utilisateur</namespace>
+      <namespace key="3" case="first-letter">Discussion utilisateur</namespace>
+      <namespace key="4" case="first-letter">Wikipédia</namespace>
+      <namespace key="5" case="first-letter">Discussion Wikipédia</namespace>
+      <namespace key="6" case="first-letter">Fichier</namespace>
+      <namespace key="7" case="first-letter">Discussion fichier</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">Discussion MediaWiki</namespace>
+      <namespace key="10" case="first-letter">Modèle</namespace>
+      <namespace key="11" case="first-letter">Discussion modèle</namespace>
+      <namespace key="12" case="first-letter">Aide</namespace>
+      <namespace key="13" case="first-letter">Discussion aide</namespace>
+      <namespace key="14" case="first-letter">Catégorie</namespace>
+      <namespace key="15" case="first-letter">Discussion catégorie</namespace>
+      <namespace key="100" case="first-letter">Portail</namespace>
+      <namespace key="101" case="first-letter">Discussion Portail</namespace>
+      <namespace key="102" case="first-letter">Projet</namespace>
+      <namespace key="103" case="first-letter">Discussion Projet</namespace>
+      <namespace key="104" case="first-letter">Référence</namespace>
+      <namespace key="105" case="first-letter">Discussion Référence</namespace>
+      <namespace key="828" case="first-letter">Module</namespace>
+      <namespace key="829" case="first-letter">Discussion module</namespace>
+      <namespace key="2300" case="first-letter">Gadget</namespace>
+      <namespace key="2301" case="first-letter">Discussion gadget</namespace>
+      <namespace key="2302" case="case-sensitive">Définition de gadget</namespace>
+      <namespace key="2303" case="case-sensitive">Discussion définition de gadget</namespace>
+      <namespace key="2600" case="first-letter">Sujet</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>Université</title>
+    <ns>0</ns>
+    <id>0</id>
+    <revision>
+      <id>132619287</id>
+      <parentid>132619275</parentid>
+      <timestamp>2016-12-12T12:49:09Z</timestamp>
+      <contributor>
+        <username>Napoleon</username>
+        <id>271994</id>
+      </contributor>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text id="132905980" bytes="9865">
+	Une '''université''' est une institution d'enseignements supérieurs, 
+	d'études et de recherches, constituée par la réunion de divers établissements 
+	nommés suivant les traditions « collèges » ou « facultés », « instituts », « départements », « centres », « sections », « unités » ou écoles spécifiques, 
+	mais aussi bibliothèque ou atelier, médiathèque ou musée... 
+	formant un ensemble administratif cohérent avec un statut de droit défini, public, privé ou éventuellement mixte. 
+	Sous cette égide légale et administrative sont ainsi rassemblées ou monopolisées 
+	la production ([[Recherche scientifique|recherche]]), 
+	la conservation ([[publication]]s et [[bibliothèque]]s) et 
+	la transmission ([[études supérieures]]) 
+	de différents champs choisis d'études et de [[connaissance]].
+      </text>
+      <sha1>4gdegly44pdfqd8qjreat0jca3dcow6</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Recherche scientifique</title>
+    <ns>0</ns>
+    <id>1</id>
+    <revision>
+      <id>130174031</id>
+      <parentid>130174007</parentid>
+      <timestamp>2016-09-30T07:59:40Z</timestamp>
+      <contributor>
+        <username>Anne Bauval</username>
+        <id>474773</id>
+      </contributor>
+      <minor/>
+      <comment>Sommaire</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text id="130396891" bytes="17441">
+	La '''recherche scientifique''' est, en premier lieu, l’ensemble des actions entreprises en vue de produire et de développer les [[Connaissance|connaissances]] scientifiques. 
+      </text>
+      <sha1>qc8b485fbvu6cr8qqupkmmix8uul5pd</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Publication</title>
+    <ns>0</ns>
+    <id>2</id>
+    <revision>
+      <id>132498637</id>
+      <parentid>132498634</parentid>
+      <timestamp>2016-12-08T14:31:13Z</timestamp>
+      <contributor>
+        <username>Thibaut120094</username>
+        <id>1740090</id>
+      </contributor>
+      <minor/>
+      <comment>Discussion en cours</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text id="132782077" bytes="4081">
+	Par extension, le terme '''publication''' a pris le sens d'impression, de parution ou de mise en vente d'une œuvre imprimée (journal, livre, etc.). 
+	Dans le langage courant, on donne le nom de publication à l'ouvrage publié lui-même (livre, article, magazine, document). 
+	Les [[bibliothèque]]s sont des lieux conservent les publications.
+      </text>
+      <sha1>0bpz41n116xcz9064gl0zagzubvtzb6</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Bibliothèque</title>
+    <ns>0</ns>
+    <id>3</id>
+    <revision>
+      <id>133703166</id>
+      <parentid>131796047</parentid>
+      <timestamp>2017-01-16T21:37:06Z</timestamp>
+      <contributor>
+        <username>Jarfe</username>
+        <id>112796</id>
+      </contributor>
+      <minor/>
+      <comment>v1.41 - [[P:CS|Correction syntaxique]] (Orthographe et typographie)</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text id="134019313" bytes="23724">
+	Une '''bibliothèque''' est le lieu où est conservée et lue une collection organisée de livres. 
+	Les bibliothèques d'enseignement et de [[Recherche scientifique|recherche]] apportent leur appui aux activités pédagogiques et scientifiques qui se déroulent dans l'[[université]] dont elles font partie.
+      </text>
+      <sha1>c26gh9yghgg9l6q9lrgv3728x3q3uy2</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>Etudes supérieures</title>
+    <ns>0</ns>
+    <id>4</id>
+      <comment>Typos à corriger</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text id="134019313" bytes="23724">
+	Le terme d'études supérieures désigne généralement l'éducation dispensée par les [[université]]s, les collèges anglo-saxons, avec en France un système plus dual de grandes écoles et d'autres institutions comme les grands établissements décernant des grades universitaires ou autres diplômes de l’enseignement supérieur.
+
+	Cette formation inclut des cours et des stages, et peut également comporter des participations à la [[recherche scientifique]] (notamment au niveau du doctorat) et intégrer de la formation continue, mais accepte souvent aussi des « auditeurs libres » qui viennent simplement accroître leurs [[connaissance]]s générales ou spécialisées.
+      </text>
+  </page>
+  <page>
+    <title>Connaissance</title>
+    <ns>0</ns>
+    <id>5</id>
+      <comment>References manquantes</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text id="134019313" bytes="23724">
+	La '''connaissance''' est une notion aux sens multiples à la fois utilisée dans le langage courant et objet d'étude poussée de la part des philosophes contemporains.
+	La gnoséologie accumule la connaissance en général, de même que la science accumule les connaissances scientifiques.
+	À l'époque de l'Antiquité, la fameuse [[bibliothèque]] d'Alexandrie veut être la représentation de l'ensemble de la connaissance de l'humanité.
+      </text>
+  </page>
+</mediawiki>

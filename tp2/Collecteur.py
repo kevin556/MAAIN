@@ -89,13 +89,19 @@ class Collecteur:
 
     def granola_de_prince(self):
         myfile = open("graph_granola.txt", "w+")
+        myfile.write("<root>"+'\n')
         for key,value in self.mot_page.iteritems():
-            myfile.write(key+'\n')
+            myfile.write("<mot>"+'\n')
+            myfile.write('\t'+"<contenu>"+key+"</contenu>"+'\n')
+
             for elem in value:
                 try:
-                    myfile.write('\t'+elem+" "+str(self.mot_page[key][elem])+'\n')
+                    myfile.write('\t'+"<page id='"+elem+"'>"+str(self.mot_page[key][elem])+"</page>"+'\n')
                 except KeyError:
                     pass
+            myfile.write("</mot>"+'\n')
+        myfile.write("</root>")
+
                         
     def analyse_page(self,idp,text_to_analyse):
         #print 'TEXT', text_to_analyse
